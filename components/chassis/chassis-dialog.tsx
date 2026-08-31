@@ -22,7 +22,16 @@ export function ChassisDialog({ chassis, trigger }: { chassis?: Chassis; trigger
   const router = useRouter();
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ChassisFormValues>({
     resolver: zodResolver(chassisSchema),
-    defaultValues: chassis ?? { status: "available" },
+    defaultValues: chassis
+      ? {
+          chassis_number: chassis.chassis_number,
+          type: chassis.type ?? "",
+          status: chassis.status,
+          date_in: chassis.date_in ?? "",
+          date_out: chassis.date_out ?? "",
+          notes: chassis.notes ?? "",
+        }
+      : { status: "available" },
   });
 
   const onSubmit = async (values: ChassisFormValues) => {

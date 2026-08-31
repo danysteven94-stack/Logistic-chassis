@@ -20,7 +20,15 @@ export function ClientDialog({ client, trigger }: { client?: Client; trigger?: R
   const router = useRouter();
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ClientFormValues>({
     resolver: zodResolver(clientSchema),
-    defaultValues: client ?? {},
+    defaultValues: client
+      ? {
+          name: client.name,
+          company: client.company ?? "",
+          phone: client.phone ?? "",
+          email: client.email ?? "",
+          address: client.address ?? "",
+        }
+      : {},
   });
 
   const onSubmit = async (values: ClientFormValues) => {
