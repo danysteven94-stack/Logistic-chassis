@@ -11,9 +11,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const { data: user } = await supabase.from("users").select("*").eq("id", authUser.id).single();
 
   return (
-    <div className="flex min-h-screen bg-deka-gray">
+    <div className="flex min-h-screen flex-col bg-deka-gray lg:flex-row">
       <Sidebar user={user as AppUser} />
-      <main className="flex-1 overflow-y-auto p-6">{children}</main>
+      <main className="flex-1 overflow-y-auto p-4 sm:p-6">{children}</main>
     </div>
   );
 }
